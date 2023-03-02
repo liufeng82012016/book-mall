@@ -22,6 +22,8 @@
         <module>consumer</module>
         <module>common</module>
         <module>tool</module>
+        <module>admin</module>
+        <module>provider</module>
     </modules>
 
     <properties>
@@ -36,6 +38,7 @@
         <spring-cloud-oauah2.version>2.2.5.RELEASE</spring-cloud-oauah2.version>
         <mysql.version>8.0.18</mysql.version>
         <mybatis-plus.version>3.4.3.4</mybatis-plus.version>
+        <spring-doc.version>1.4.5</spring-doc.version>
     </properties>
 
 

@@ -1,0 +1,17 @@
+server:
+  port: 8111
+  servlet:
+    context-path: /admin
+spring:
+  application:
+    name: admin
+  cloud:
+    nacos:
+      discovery:
+        enabled: true
+        namespace: 77d3b4df-97fc-4254-b2a2-b2b13711b469
+        group: liufeng
+        server-addr: localhost:8848
+
+
+
