@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
  * @since 2023-03-02
  */
 @Controller
-@RequestMapping("/auth/sysUsers")
+@RequestMapping("/user")
 public class SysUsersController {
 
 }

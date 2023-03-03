@@ -51,7 +51,7 @@ public class GoogleAuthUtil {
      *
      * @return secret
      */
-    private static String generateSecretKey() {
+    public static String generateSecretKey() {
         SecureRandom sr = null;
         try {
             sr = SecureRandom.getInstance(RANDOM_NUMBER_ALGORITHM);
@@ -115,6 +115,7 @@ public class GoogleAuthUtil {
         // The validation code is invalid.
         return false;
     }
+
 
     private static int verifyoCde(byte[] key, long t) throws NoSuchAlgorithmException, InvalidKeyException {
         byte[] data = new byte[8];
