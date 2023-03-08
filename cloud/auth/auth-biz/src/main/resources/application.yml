@@ -15,7 +15,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/gateway
+    url: jdbc:mysql://localhost:3306/auth
     username: root
     password: 123456
   redis:

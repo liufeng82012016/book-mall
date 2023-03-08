@@ -1,7 +1,7 @@
 package com.my.liufeng.provider.utils;
 
-import com.my.liufeng.Asserts;
-import com.my.liufeng.enums.ErrorCode;
+import com.my.liufeng.common.Asserts;
+import com.my.liufeng.common.enums.ErrorCode;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 

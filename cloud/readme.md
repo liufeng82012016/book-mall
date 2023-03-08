@@ -1,5 +1,11 @@
 ### 版本号
 Nacos 2.2.0
+Redis 5.0.14
+MySQL 8.0.17
+ELK   7.17.6
+Spring Boot 2.7.4
+Spring Cloud 2021.0.4
+Spring Cloud Alibaba 2021.0.4.0
 
 
 ### cloud （Spring Cloud Alibaba项目搭建）
@@ -83,8 +89,23 @@ Nacos 2.2.0
        16. 总之，是测试代码问题，实际上配置刷新已经成功了
 15. 网关基本功能ok，添加其他模块 
     1. provider：作为starter为其他服务提供者提供支持，包含redis，openfeign配置
+    2. common：基础包，提供各种实体类、通用工具类
+    3. auth：用户登录注册、权限管理
+    4. admin：提供后台管理接口
+    5. consumer：提供web接口
+    6. openapi：暂无（如提供外部接口访问再建立）
+    7. 备注：gateway只提供admin、consumer、openapi路由，服务提供者不暴露
+16. 
 
 
 #### 安装redis单机版
 1. docker pull redis:5.0.14 
 2. docker run -d -p 6379:6379 --name redis -v /Users/liufeng/IdeaProjects/book-mall/cloud/redis/data:/data -v /Users/liufeng/IdeaProjects/book-mall/cloud/redis/conf:/etc/redis redis:5.0.14 redis-server /etc/redis/redis.conf 
+
+#### 问题记录
+1. org.springframework.web.HttpMediaTypeNotAcceptableException.HttpMediaTypeNotAcceptableException(java.util.List<org.springframework.http.MediaType>)
+   1. 原因：Result<T>类没有提供getter方法，无法反序列化
+2. @Resource RemoteUserService remoteUserService；无法注入
+   1. 原因：只设置了@SpringBootApplication的扫描路径，没有设置@EnableFeignClients扫描路径
+3. SpringBoot @CrossOrigin有效，gateway无效
+   1. 去除consumer模块controller的 @CrossOrigin注解，配置gateway 拦截器（com.my.liufeng.gateway.config.CorsConfig.corsWebFilter）

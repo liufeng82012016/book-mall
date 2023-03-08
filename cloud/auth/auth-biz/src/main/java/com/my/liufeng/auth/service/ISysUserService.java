@@ -1,10 +1,10 @@
 package com.my.liufeng.auth.service;
 
-import com.my.liufeng.auth.entity.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.my.liufeng.user.dto.RegisterDTO;
-import com.my.liufeng.user.vo.LoginVO;
-import com.my.liufeng.user.vo.RegisterVO;
+import com.my.liufeng.auth.entity.SysUser;
+import com.my.liufeng.common.user.dto.RegisterDTO;
+import com.my.liufeng.common.user.vo.LoginVO;
+import com.my.liufeng.common.user.vo.RegisterVO;
 
 /**
  * <p>

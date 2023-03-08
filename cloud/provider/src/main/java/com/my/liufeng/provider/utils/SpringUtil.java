@@ -1,11 +1,13 @@
 package com.my.liufeng.provider.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class SpringUtil implements ApplicationContextAware {
     private static ApplicationContext context = null;
@@ -14,6 +16,7 @@ public class SpringUtil implements ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         SpringUtil.context = applicationContext;
+        log.info("context init...");
     }
 
     public static Object getBean(String beanName) {

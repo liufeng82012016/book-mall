@@ -1,7 +1,18 @@
 package com.my.liufeng.auth;
 
+import com.my.liufeng.common.user.dto.RegisterDTO;
+import com.my.liufeng.common.user.vo.RegisterVO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "auth")
-public class RemoteUserService {
+@FeignClient(value = "auth",configuration = Fe)
+public interface RemoteUserService {
+    @GetMapping(value = "/auth/public/getSecret")
+    String getSecret(@RequestParam String account);
+
+    @PostMapping("/auth/public/register")
+    RegisterDTO register(@RequestBody RegisterVO registerVO);
 }
