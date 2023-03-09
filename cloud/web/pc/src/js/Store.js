@@ -1,21 +1,29 @@
 import {defineStore} from 'pinia'
 
-export default useUserInfo = defineStore("userInfo", {
-    userInfo: () => ({
+export const useUserInfo = defineStore("userInfo", {
+    state: () => ({
         nickname: "",
         avatar: "",
         token: ""
     }),
     getters: {
-        nickname: (useUserInfo) => useUserInfo.nickname,
-        avatar: (useUserInfo) => useUserInfo.avatar,
-        token: (useUserInfo) => useUserInfo.token,
-    }, actions: {
-        setToken(token: String) {
+        // nickname: () => {
+        //     return userInfo.nickname;
+        // },
+        // avatar: () => {
+        //     return userInfo.avatar;
+        // },
+        // token: () => {
+        //     return userInfo.token;
+        // },
+    },
+    actions: {
+        setToken(token) {
             if (!token) {
                 return;
             }
             this.token = token;
+            console.log("set token:" + token)
         },
         clearToken() {
             this.token = '';

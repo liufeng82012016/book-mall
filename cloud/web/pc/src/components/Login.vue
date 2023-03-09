@@ -1,6 +1,6 @@
 <template>
   <div class="login-form">
-    <t-form ref="form" :data="formData" :rules="rules" @reset="onReset" @submit="onSubmit" :label-width="0">
+    <t-form ref="form" :data="formData" :rules="rules" @submit="login" :label-width="0">
       <t-form-item>
         <t-space>
           <t-select v-model="formData.type" placeholder="请选择登录方式">
@@ -40,12 +40,14 @@
 
 </template>
 <script setup>
-import {ref, reactive} from 'vue';
+import {ref, reactive, getCurrentInstance} from 'vue';
 import {MessagePlugin} from 'tdesign-vue-next';
 import {DesktopIcon, LockOnIcon} from 'tdesign-icons-vue-next';
+import {useUserInfo} from '../js/Store.js'
 
 
 const form = ref(null);
+// 接受表单数据
 const formData = reactive({
   account: '',
   password: '',
@@ -53,6 +55,8 @@ const formData = reactive({
   type: '1',
 });
 
+
+// 定义表单校验规则
 const rules = {
   account: [
     {required: true, message: '请输入账号', type: 'error'},
@@ -68,29 +72,49 @@ const rules = {
   ]
 };
 
+// 定义登录方式
 const loginTypeOptions = [
   {label: '账户名登录', value: '1'},
   {label: '手机号登录', value: '2'},
   {label: '邮箱登录', value: '3'},
 ];
 
-const onReset = () => {
-  MessagePlugin.success('重置成功');
-};
+const userInfo = useUserInfo();
 
-const onSubmit = ({validateResult, firstError, e}) => {
+const currentInstance = getCurrentInstance()
+const $http = currentInstance.appContext.config.globalProperties.$http
+// 发起登录请求
+const login = ({validateResult, firstError, e}) => {
   e.preventDefault();
   if (validateResult === true) {
-    MessagePlugin.success('提交成功');
+    $http({
+      method: "POST",
+      url: "/activity/public/login",
+      header: {
+        'Content-Type': 'application/json'
+      },
+      data: {
+        'account': formData.account,
+        'password': formData.password,
+        'code': formData.code
+      }
+    }).then(function (response) {
+      console.log("data:" + response.data);
+      if (response.data.code === 0) {
+        localStorage.setItem("token", response.data.data.token)
+        // 登录成功后，存储token
+        userInfo.setToken(response.data.data.token);
+      } else {
+        MessagePlugin.warning(response.data.msg);
+      }
+    }).catch(function (error) {
+      MessagePlugin.warning("获取动态口令失败，请稍后再试")
+    })
   } else {
-    console.log('Validate Errors: ', firstError, validateResult);
     MessagePlugin.warning(firstError);
   }
 };
 
-const handleClear = () => {
-  form.value.clearValidate();
-};
 </script>
 <style scoped>
 .login-form {

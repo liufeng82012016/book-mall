@@ -24,6 +24,7 @@
         <module>tool</module>
         <module>admin</module>
         <module>provider</module>
+        <module>base-api</module>
     </modules>
 
     <properties>
@@ -39,6 +40,7 @@
         <mysql.version>8.0.18</mysql.version>
         <mybatis-plus.version>3.4.3.4</mybatis-plus.version>
         <spring-doc.version>1.6.10</spring-doc.version>
+        <fastjson.version>1.2.83</fastjson.version>
     </properties>
 
 

@@ -4,6 +4,7 @@ public enum ErrorCode {
     LOCK_ERROR(1001, "请稍后再试"),
     SYSTEM_ERROR(1002, "系统繁忙"),
     DATA_ERROR(1101, "数据异常"),
+    PARAM_ERROR(1102, "参数异常"),
     ACCOUNT_FORMAT_ERROR(10001, "账号格式错误"),
     ACCOUNT_REPEAT_ERROR(10002, "账号已存在"),
     PASSWORD_FORMAT_ERROR(10003, "密码格式错误"),

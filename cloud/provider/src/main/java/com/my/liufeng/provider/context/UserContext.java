@@ -4,9 +4,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class UserContext {
+    private Integer userId;
     private HttpServletRequest request;
     private HttpServletResponse response;
-    private Integer userId;
+
+    public UserContext() {
+    }
+
+    public UserContext(Integer userId, HttpServletRequest request, HttpServletResponse response) {
+        this.userId = userId;
+        this.request = request;
+        this.response = response;
+    }
 
     public HttpServletRequest getRequest() {
         return request;

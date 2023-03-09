@@ -12,4 +12,10 @@ spring:
         namespace: 77d3b4df-97fc-4254-b2a2-b2b13711b469
         group: liufeng
         server-addr: localhost:8848
-
+logging:
+  level:
+    com:
+      my:
+        liufeng:
+          auth:
+            RemoteUserService: DEBUG

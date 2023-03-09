@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableFeignClients(basePackages = "com.my.liufeng")
 @EnableDiscoveryClient
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.my.liufeng.consumer","com.my.liufeng.provider"})
 public class ConsumerApplication {
 
     public static void main(String[] args) {

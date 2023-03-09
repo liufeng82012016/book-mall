@@ -109,3 +109,5 @@ Spring Cloud Alibaba 2021.0.4.0
    1. 原因：只设置了@SpringBootApplication的扫描路径，没有设置@EnableFeignClients扫描路径
 3. SpringBoot @CrossOrigin有效，gateway无效
    1. 去除consumer模块controller的 @CrossOrigin注解，配置gateway 拦截器（com.my.liufeng.gateway.config.CorsConfig.corsWebFilter）
+4. feign日志未打印 
+   1. 安装官方文档先配置yml设置级别，然后@FeignClient指定Logger.Level。官网文档详见：https://cloud.spring.io/spring-cloud-openfeign/reference/html/#feign-logging

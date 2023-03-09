@@ -1,4 +1,5 @@
 package com.my.liufeng.common;
+
 import com.my.liufeng.common.enums.ErrorCode;
 import com.my.liufeng.common.exception.BrokenException;
 import lombok.Data;
@@ -34,6 +35,14 @@ public class Result<T> {
 
     public static <T> Result<T> fail(ErrorCode error) {
         return new Result<>(error.getCode(), error.getMsg());
+    }
+
+    public static <T> Result<T> fail(Integer code, String msg) {
+        return new Result<>(code, msg);
+    }
+
+    public static <T> Result<T> fail(ErrorCode error, String msg) {
+        return new Result<>(error.getCode(), msg);
     }
 
     public static <T> Result<T> fail(BrokenException ex) {

@@ -12,9 +12,11 @@ import com.my.liufeng.common.exception.BrokenException;
 import com.my.liufeng.common.user.dto.RegisterDTO;
 import com.my.liufeng.common.user.vo.LoginVO;
 import com.my.liufeng.common.user.vo.RegisterVO;
+import com.my.liufeng.common.utils.JsonUtils;
+import com.my.liufeng.common.utils.RandomUtils;
 import com.my.liufeng.provider.enums.CacheLevel;
 import com.my.liufeng.provider.utils.CacheUtil;
-import org.apache.commons.lang3.RandomStringUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -29,6 +31,7 @@ import java.nio.charset.StandardCharsets;
  * @author liufeng
  * @since 2023-03-02
  */
+@Slf4j
 @Service
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements ISysUserService {
 
@@ -49,11 +52,18 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         SysUser sysUser = new SysUser();
         sysUser.setAccount(registerVO.getAccount());
         sysUser.setSecret(registerVO.getSecret());
-        String salt = RandomStringUtils.random(16);
+        String salt = RandomUtils.randomStr(16);
         sysUser.setSalt(salt);
         sysUser.setPassword(signPassword(registerVO.getPassword(), salt));
         try {
-            Asserts.assertTrue(save(sysUser), ErrorCode.LOCK_ERROR);
+            if (log.isDebugEnabled()) {
+                log.debug("用户注册校验通过，数据:{}", JsonUtils.toJsonString(sysUser));
+            }
+            boolean save = save(sysUser);
+            if (log.isDebugEnabled()) {
+                log.debug("用户注册写入结果[{}]，数据:{}", save, JsonUtils.toJsonString(sysUser));
+            }
+            Asserts.assertTrue(save, ErrorCode.SYSTEM_ERROR);
             return generatorToken(sysUser);
         } catch (DuplicateKeyException e) {
             throw new BrokenException(ErrorCode.ACCOUNT_REPEAT_ERROR);
@@ -71,7 +81,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         verifyDynamicPassword(sysUser.getSecret(), loginVO.getCode());
         // 校验密码
         String signPassword = signPassword(loginVO.getPassword(), sysUser.getSalt());
-        Asserts.assertTrue(signPassword.equals(loginVO.getPassword()), ErrorCode.PASSWORD_ERROR);
+        Asserts.assertTrue(signPassword.equals(sysUser.getPassword()), ErrorCode.PASSWORD_ERROR);
         return generatorToken(sysUser);
     }
 
@@ -104,10 +114,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      * @return /
      */
     private RegisterDTO generatorToken(SysUser sysUser) {
-        String token = RandomStringUtils.random(32);
+        String token = RandomUtils.randomStr(32);
         CacheUtil.set(token, sysUser, CacheLevel.WEB_TOKEN);
         RegisterDTO registerDTO = new RegisterDTO();
         registerDTO.setToken(token);
+        log.info("用户[{}]生成token:[{}]", sysUser.getId(), token);
         return registerDTO;
     }
 }

@@ -1,7 +1,11 @@
 package com.my.liufeng.provider.context;
 
-import javax.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@Slf4j
 public class ContextUtils {
 
     private static ThreadLocal<UserContext> contextContainer = new ThreadLocal<>();
@@ -18,7 +22,21 @@ public class ContextUtils {
         contextContainer.set(userContext);
     }
 
-    public static void removeContext(UserContext userContext) {
+    public static void removeContext() {
         contextContainer.remove();
+    }
+
+    public static void setHttp500() {
+        UserContext userContext = contextContainer.get();
+        if (userContext != null) {
+            userContext.getResponse().setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            if (log.isDebugEnabled()) {
+                log.debug("request[{}] 设置status500", userContext.getRequest().getRequestURI());
+            }
+        } else {
+            if (log.isDebugEnabled()) {
+                log.info("context is null");
+            }
+        }
     }
 }

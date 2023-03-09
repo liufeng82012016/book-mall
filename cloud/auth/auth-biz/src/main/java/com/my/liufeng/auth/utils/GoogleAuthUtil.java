@@ -99,7 +99,7 @@ public class GoogleAuthUtil {
         for (int i = -window_size; i <= window_size; ++i) {
             long hash;
             try {
-                hash = verifyoCde(decodedKey, t + i);
+                hash = verifyCdoe(decodedKey, t + i);
             } catch (Exception e) {
                 // Yes, this is bad form - but
                 // the exceptions thrown would be rare and a static configuration problem
@@ -107,7 +107,6 @@ public class GoogleAuthUtil {
                 throw new RuntimeException(e.getMessage());
                 //return false;
             }
-            System.out.println("hash: " + hash);
             if (hash == code) {
                 return true;
             }
@@ -117,7 +116,7 @@ public class GoogleAuthUtil {
     }
 
 
-    private static int verifyoCde(byte[] key, long t) throws NoSuchAlgorithmException, InvalidKeyException {
+    private static int verifyCdoe(byte[] key, long t) throws NoSuchAlgorithmException, InvalidKeyException {
         byte[] data = new byte[8];
         long value = t;
         for (int i = 8; i-- > 0; value >>>= 8) {

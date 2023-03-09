@@ -13,19 +13,26 @@
 
   </div>
 </template>
-<script lang="ts" setup>
+<script lang="ts">
 import Login from './Login.vue'
 import Register from './Register.vue'
 import Verse from './Verse.vue'
-import {ref, reactive} from 'vue'
+import {ref, reactive, defineEmits} from 'vue'
 
-const pageInfo = reactive({
-  isLogin: true
-})
-
-const change = () => {
-  pageInfo.isLogin = !pageInfo.isLogin;
+export default {
+  setup() {
+    const pageInfo = reactive({
+      isLogin: true
+    })
+    const change = () => {
+      pageInfo.isLogin = !pageInfo.isLogin;
+    }
+    return {
+      pageInfo,change
+    }
+  }
 }
+
 </script>
 <style lang="less" scoped>
 .login-mask {

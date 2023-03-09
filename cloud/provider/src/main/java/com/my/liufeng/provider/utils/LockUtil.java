@@ -2,8 +2,8 @@ package com.my.liufeng.provider.utils;
 
 import com.my.liufeng.common.Asserts;
 import com.my.liufeng.common.enums.ErrorCode;
+import com.my.liufeng.common.utils.RandomUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -31,6 +31,8 @@ public class LockUtil {
      */
     public static void lockSuccess(String key, String value, int expireSeconds) {
         boolean lock = lock(key, value, expireSeconds);
+        Object value2 = SpringUtil.redisTemplate().opsForValue().get(key);
+        log.info("lock key{} value1:[{}] value:[{}]", key, value, value2);
         Asserts.assertTrue(lock, ErrorCode.LOCK_ERROR);
     }
 
@@ -77,7 +79,7 @@ public class LockUtil {
      * @return 线程id+随机24位字符串
      */
     public static String randomValue() {
-        return Thread.currentThread() + RandomStringUtils.random(24);
+        return Thread.currentThread() + RandomUtils.randomStr(24);
     }
 
 

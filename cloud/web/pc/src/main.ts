@@ -3,6 +3,8 @@ import './style.css'
 import App from './App.vue'
 import axios from 'axios'
 import 'tdesign-vue-next/es/style/index.css';
+import './assets/iconfont/iconfont.css';
+import router from './js/router.js';
 
 import {createPinia} from 'pinia'
 
@@ -35,4 +37,5 @@ const pinia = createPinia();
 let app = createApp(App);
 app.config.globalProperties.$http = axios
 app.use(pinia)
+app.use(router)
 app.mount('#app')
