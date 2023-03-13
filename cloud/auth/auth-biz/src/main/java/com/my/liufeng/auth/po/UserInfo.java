@@ -1,4 +1,4 @@
-package com.my.liufeng.auth.entity;
+package com.my.liufeng.auth.po;
 
 public class UserInfo {
     private String account;

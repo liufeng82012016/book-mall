@@ -1,6 +1,6 @@
 package com.my.liufeng.auth.mapper;
 
-import com.my.liufeng.auth.entity.SysRolesPermission;
+import com.my.liufeng.auth.po.SysRolesPermission;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

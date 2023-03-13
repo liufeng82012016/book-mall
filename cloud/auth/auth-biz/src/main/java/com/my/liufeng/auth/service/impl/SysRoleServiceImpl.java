@@ -1,6 +1,6 @@
 package com.my.liufeng.auth.service.impl;
 
-import com.my.liufeng.auth.entity.SysRole;
+import com.my.liufeng.auth.po.SysRole;
 import com.my.liufeng.auth.mapper.SysRoleMapper;
 import com.my.liufeng.auth.service.ISysRoleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

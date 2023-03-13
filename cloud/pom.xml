@@ -25,6 +25,7 @@
         <module>admin</module>
         <module>provider</module>
         <module>base-api</module>
+        <module>book</module>
     </modules>
 
     <properties>
@@ -39,8 +40,11 @@
         <spring-cloud-oauah2.version>2.2.5.RELEASE</spring-cloud-oauah2.version>
         <mysql.version>8.0.18</mysql.version>
         <mybatis-plus.version>3.4.3.4</mybatis-plus.version>
-        <spring-doc.version>1.6.10</spring-doc.version>
         <fastjson.version>1.2.83</fastjson.version>
+        <org.mapstruct.version>1.5.2.Final</org.mapstruct.version>
+        <spring-doc.version>1.6.10</spring-doc.version>
+        <!--swagger和springdoc版本号保持对应关系-->
+        <swagger-annotations>2.2.2</swagger-annotations>
     </properties>
 
 

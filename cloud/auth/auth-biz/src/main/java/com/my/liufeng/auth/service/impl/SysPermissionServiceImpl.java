@@ -1,6 +1,6 @@
 package com.my.liufeng.auth.service.impl;
 
-import com.my.liufeng.auth.entity.SysPermission;
+import com.my.liufeng.auth.po.SysPermission;
 import com.my.liufeng.auth.mapper.SysPermissionMapper;
 import com.my.liufeng.auth.service.ISysPermissionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

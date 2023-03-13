@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.my.liufeng.book.mapper.BookPageMapper">
+
+    <select id="queryMaxPageId" resultType="java.lang.Integer">
+        select max(page_id) from tb_book_page where book_id = #{bookId}
+    </select>
+</mapper>

@@ -16,7 +16,8 @@ public class MybatisPlusUtils {
     private final static String BASE_DIR = "/Users/liufeng/IdeaProjects/book-mall/cloud";
 
     public static void main(String[] args) {
-        generator(defaultConfig("auth"));
+//        generator(defaultConfig("auth",null));
+        generator(defaultConfig("book", "book-biz"));
 
     }
 
@@ -27,14 +28,14 @@ public class MybatisPlusUtils {
      * @param moduleName 模块名
      * @return 模块配置
      */
-    private static ModuleConfig defaultConfig(String moduleName) {
+    private static ModuleConfig defaultConfig(String moduleName, String childModuleName) {
         String url = "jdbc:mysql://127.0.0.1:3306/" + moduleName,
                 username = "root",
                 password = "123456",
                 author = "liufeng",
                 packageName = "com.my.liufeng",
                 entityDir = "entity";
-        return new ModuleConfig(url, username, password, author, packageName, moduleName, entityDir);
+        return new ModuleConfig(url, username, password, author, packageName, moduleName, entityDir, childModuleName);
     }
 
 
@@ -44,19 +45,21 @@ public class MybatisPlusUtils {
      * @param moduleConfig 模块配置
      */
     private static void generator(ModuleConfig moduleConfig) {
+        String modulePath = BASE_DIR + "/" + moduleConfig.moduleName +
+                (moduleConfig.childModuleName != null ? "/" + moduleConfig.childModuleName : "");
         FastAutoGenerator generator = FastAutoGenerator.create(moduleConfig.url, moduleConfig.username, moduleConfig.password)
                 .globalConfig(builder -> {
                     builder.author(moduleConfig.author) // 设置作者
                             .enableSwagger() // 开启 swagger 模式
                             .fileOverride() // 覆盖已生成文件
                             .disableOpenDir() //禁止打开输出目录
-                            .outputDir(BASE_DIR + "/" + moduleConfig.moduleName + "/src/main/java"); // 指定输出目录
+                            .outputDir(modulePath + "/src/main/java"); // 指定输出目录
                 })
                 .packageConfig(builder -> {
                     builder.parent(moduleConfig.packageName) // 设置父包名
                             .moduleName(moduleConfig.moduleName) // 设置父包模块名
                             .entity(moduleConfig.entityDir) //设置entity包名
-                            .pathInfo(Collections.singletonMap(OutputFile.mapperXml, BASE_DIR + "/" + moduleConfig.moduleName + "/src/main/resources/mapper")); // 设置mapperXml生成路径
+                            .pathInfo(Collections.singletonMap(OutputFile.mapperXml, modulePath + "/src/main/resources/mapper")); // 设置mapperXml生成路径
 
                 })
                 .strategyConfig(builder -> {
@@ -78,8 +81,11 @@ public class MybatisPlusUtils {
         String moduleName;
         // 实体类包名
         String entityDir;
+        // 子模块名称
+        String childModuleName;
 
-        public ModuleConfig(String url, String username, String password, String author, String packageName, String moduleName, String entityDir) {
+        public ModuleConfig(String url, String username, String password, String author, String packageName,
+                            String moduleName, String entityDir, String childModuleName) {
             this.url = url;
             this.username = username;
             this.password = password;
@@ -87,6 +93,7 @@ public class MybatisPlusUtils {
             this.packageName = packageName;
             this.moduleName = moduleName;
             this.entityDir = entityDir;
+            this.childModuleName = childModuleName;
         }
     }
 }

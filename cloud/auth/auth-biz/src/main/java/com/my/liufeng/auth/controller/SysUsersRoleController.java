@@ -2,8 +2,7 @@ package com.my.liufeng.auth.controller;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Controller;
  * @author liufeng
  * @since 2023-03-02
  */
-@Controller
+@RestController
 @RequestMapping("/auth/sysUsersRole")
 public class SysUsersRoleController {
 

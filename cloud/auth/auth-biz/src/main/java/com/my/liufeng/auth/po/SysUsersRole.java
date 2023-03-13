@@ -1,4 +1,4 @@
-package com.my.liufeng.auth.entity;
+package com.my.liufeng.auth.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

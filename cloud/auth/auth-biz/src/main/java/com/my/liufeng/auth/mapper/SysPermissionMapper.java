@@ -1,6 +1,6 @@
 package com.my.liufeng.auth.mapper;
 
-import com.my.liufeng.auth.entity.SysPermission;
+import com.my.liufeng.auth.po.SysPermission;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

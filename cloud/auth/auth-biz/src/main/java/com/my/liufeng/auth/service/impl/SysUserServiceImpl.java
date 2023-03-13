@@ -2,7 +2,7 @@ package com.my.liufeng.auth.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.my.liufeng.auth.entity.SysUser;
+import com.my.liufeng.auth.po.SysUser;
 import com.my.liufeng.auth.mapper.SysUserMapper;
 import com.my.liufeng.auth.service.ISysUserService;
 import com.my.liufeng.auth.utils.GoogleAuthUtil;

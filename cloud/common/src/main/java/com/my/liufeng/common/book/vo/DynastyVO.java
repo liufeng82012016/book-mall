@@ -1,0 +1,53 @@
+package com.my.liufeng.common.book.vo;
+
+public class DynastyVO {
+    private Long id;
+
+    private String name;
+
+    private String description;
+
+    private Integer size;
+    private Integer current;
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public Integer getPageNumber() {
+        return PageNumber;
+    }
+
+    public void setPageNumber(Integer pageNumber) {
+        PageNumber = pageNumber;
+    }
+}

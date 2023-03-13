@@ -32,7 +32,9 @@ public class LockUtil {
     public static void lockSuccess(String key, String value, int expireSeconds) {
         boolean lock = lock(key, value, expireSeconds);
         Object value2 = SpringUtil.redisTemplate().opsForValue().get(key);
-        log.info("lock key{} value1:[{}] value:[{}]", key, value, value2);
+        if (log.isDebugEnabled()) {
+            log.debug("lock key{} value1:[{}] value:[{}]", key, value, value2);
+        }
         Asserts.assertTrue(lock, ErrorCode.LOCK_ERROR);
     }
 

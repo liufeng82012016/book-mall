@@ -1,4 +1,4 @@
-package com.my.liufeng.auth.entity;
+package com.my.liufeng.book.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -10,32 +10,32 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 
+ * 朝代表
  * </p>
  *
  * @author liufeng
- * @since 2023-03-02
+ * @since 2023-03-10
  */
-@TableName("tb_sys_role")
-@Schema(name = "SysRole对象", description = "")
-public class SysRole implements Serializable {
+@TableName("tb_dynasty")
+@Schema(name = "Dynasty对象", description = "朝代表")
+public class Dynasty implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Schema(name="角色id")
+    @Schema(name="id")
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @Schema(name="角色名称")
+    @Schema(name="名称")
     private String name;
 
-    @Schema(name="角色描述")
+    @Schema(name="介绍")
     private String description;
 
-    @Schema(name="是否锁定(0否 1是)")
-    private Boolean available;
+    @Schema(name="最后更新的管理员id")
+    private Integer managerId;
 
-    @Schema(name="角色创建时间")
+    @Schema(name="创建时间")
     private LocalDateTime createTime;
 
     @Schema(name="更新时间")
@@ -66,12 +66,12 @@ public class SysRole implements Serializable {
         this.description = description;
     }
 
-    public Boolean getAvailable() {
-        return available;
+    public Integer getManagerId() {
+        return managerId;
     }
 
-    public void setAvailable(Boolean available) {
-        this.available = available;
+    public void setManagerId(Integer managerId) {
+        this.managerId = managerId;
     }
 
     public LocalDateTime getCreateTime() {
@@ -92,11 +92,11 @@ public class SysRole implements Serializable {
 
     @Override
     public String toString() {
-        return "SysRole{" +
+        return "Dynasty{" +
         "id=" + id +
         ", name=" + name +
         ", description=" + description +
-        ", available=" + available +
+        ", managerId=" + managerId +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +
         "}";

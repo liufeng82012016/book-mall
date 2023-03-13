@@ -8,6 +8,20 @@ Spring Cloud 2021.0.4
 Spring Cloud Alibaba 2021.0.4.0
 
 
+pinia: 2.0.33
+qrcodejs2-fixes: 0.0.2
+vue: 3.2.45
+@vitejs/plugin-vue: 4.0.0
+axios: 1.3.4
+less: 4.1.3
+typescript: 4.9.3
+unplugin-auto-import: 0.15.0
+unplugin-vue-components: 0.24.0
+vite: 4.1.0
+vue-router: 4.0.13
+vue-tsc: 1.0.24
+
+
 ### cloud （Spring Cloud Alibaba项目搭建）
 1. 搭建父工程，仅pom.xml，主要用于版本管理
 2. 搭建gateway模块
@@ -94,7 +108,8 @@ Spring Cloud Alibaba 2021.0.4.0
     4. admin：提供后台管理接口
     5. consumer：提供web接口
     6. openapi：暂无（如提供外部接口访问再建立）
-    7. 备注：gateway只提供admin、consumer、openapi路由，服务提供者不暴露
+    7. book：书籍管理服务
+    8. 备注：gateway只提供admin、consumer、openapi路由，服务提供者不暴露
 16. 
 
 
@@ -110,4 +125,4 @@ Spring Cloud Alibaba 2021.0.4.0
 3. SpringBoot @CrossOrigin有效，gateway无效
    1. 去除consumer模块controller的 @CrossOrigin注解，配置gateway 拦截器（com.my.liufeng.gateway.config.CorsConfig.corsWebFilter）
 4. feign日志未打印 
-   1. 安装官方文档先配置yml设置级别，然后@FeignClient指定Logger.Level。官网文档详见：https://cloud.spring.io/spring-cloud-openfeign/reference/html/#feign-logging
+   1. 安装官方文档先配置yml设置为debug级别，然后@FeignClient指定Logger.Level。官网文档详见：https://cloud.spring.io/spring-cloud-openfeign/reference/html/#feign-logging

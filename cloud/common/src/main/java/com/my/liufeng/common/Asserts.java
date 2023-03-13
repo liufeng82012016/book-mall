@@ -5,6 +5,7 @@ import com.my.liufeng.common.exception.BrokenException;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 简单断言工具类
@@ -41,7 +42,19 @@ public class Asserts {
      * @param error 错误码
      */
     public static void assertNotNull(Object obj, ErrorCode error) {
-        if (obj == null) {
+        if (Objects.isNull(obj)) {
+            throw new BrokenException(error);
+        }
+    }
+
+    /**
+     * 期望对象为空
+     *
+     * @param obj   对象
+     * @param error 错误码
+     */
+    public static void assertNull(Object obj, ErrorCode error) {
+        if (Objects.nonNull(obj)) {
             throw new BrokenException(error);
         }
     }

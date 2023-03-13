@@ -8,7 +8,7 @@
             <Logo></Logo>
           </template>
           <router-link to="/index"><t-menu-item value="indexMenuItem">首页</t-menu-item></router-link>
-          <router-link to="/collect"> <t-menu-item value="collectMenuItem">收藏</t-menu-item></router-link>
+          <router-link to="/collect"> <t-menu-item value="collectMenuItem">书架</t-menu-item></router-link>
           <t-menu-item value="orderMenuItem">订单</t-menu-item>
         </t-head-menu>
       </div>

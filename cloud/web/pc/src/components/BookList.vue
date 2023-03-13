@@ -2,7 +2,7 @@
   <div class="book-list">
     <div v-for="item in bookList" :key="item.id" class="book-container" @mouseover="onMouseOver(item.id)"
          @mouseleave="onMouseLeave">
-      <t-card :cover="item.cover" theme="poster2">
+      <t-card :cover="item.cover" theme="poster2" :bordered="false">
         <template #footer>
           <t-card :title="item.title" :subtitle="item.author" :description="item.desc" hover-shadow :bordered="false">
           </t-card>
