@@ -26,6 +26,7 @@ spring:
       pool:
         max-idle: 4
     timeout: 6000
+    database: 0
 mybatis-plus:
   mapper-locations: classpath:mapper/*/*.xml,mapper/*.xml
   global-config:

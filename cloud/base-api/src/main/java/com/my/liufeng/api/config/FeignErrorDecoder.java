@@ -5,16 +5,20 @@ import com.my.liufeng.common.exception.BrokenException;
 import com.my.liufeng.common.utils.JsonUtils;
 import feign.Response;
 import feign.codec.ErrorDecoder;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
+@Slf4j
 public class FeignErrorDecoder implements ErrorDecoder {
 
     public FeignErrorDecoder() {
-        System.out.println("FeignErrorDecoder init...");
+        if (log.isDebugEnabled()) {
+            log.debug("FeignErrorDecoder init...");
+        }
     }
 
     @Override
@@ -28,7 +32,9 @@ public class FeignErrorDecoder implements ErrorDecoder {
                 result.write(buffer, 0, length);
             }
             String bodyStr = result.toString(StandardCharsets.UTF_8);
-            System.out.println("error:" + bodyStr);
+            if (log.isDebugEnabled()) {
+                log.debug("error:" + bodyStr);
+            }
             return JsonUtils.read(bodyStr, BrokenException.class);
         } catch (IOException e) {
             //

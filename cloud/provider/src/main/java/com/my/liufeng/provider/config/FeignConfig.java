@@ -33,10 +33,11 @@ public class FeignConfig {
                     result.write(buffer, 0, length);
                 }
                 String bodyStr = result.toString(StandardCharsets.UTF_8);
-                return JsonUtils.read(bodyStr, BrokenException.class);
-
+                BrokenException exception = JsonUtils.read(bodyStr, BrokenException.class);
+                exception.setErrorVersion(exception.getErrorVersion() + 1);
+                return exception;
             } catch (IOException e) {
-                e.printStackTrace();
+                //
             }
             return new BrokenException(ErrorCode.SYSTEM_ERROR);
         }

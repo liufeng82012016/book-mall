@@ -7,6 +7,7 @@ public class BrokenException extends RuntimeException {
 
     private int code;
     private String msg;
+    private int errorVersion;
 
     public BrokenException() {
 
@@ -15,7 +16,9 @@ public class BrokenException extends RuntimeException {
     public BrokenException(ErrorCode error) {
         this.code = error.getCode();
         this.msg = error.getMsg();
+        this.errorVersion = 1;
     }
+
 
     public int getCode() {
         return code;
@@ -31,5 +34,13 @@ public class BrokenException extends RuntimeException {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public int getErrorVersion() {
+        return errorVersion;
+    }
+
+    public void setErrorVersion(int errorVersion) {
+        this.errorVersion = errorVersion;
     }
 }

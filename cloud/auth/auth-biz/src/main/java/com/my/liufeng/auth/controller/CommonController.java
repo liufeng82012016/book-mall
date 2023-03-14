@@ -9,6 +9,7 @@ import com.my.liufeng.common.user.dto.RegisterDTO;
 import com.my.liufeng.common.user.vo.LoginVO;
 import com.my.liufeng.common.user.vo.RegisterVO;
 import com.my.liufeng.common.utils.RegUtils;
+import com.my.liufeng.provider.support.DistributeLock;
 import com.my.liufeng.provider.utils.CacheUtil;
 import com.my.liufeng.provider.utils.LockUtil;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -51,9 +52,9 @@ public class CommonController {
     public RegisterDTO register(@RequestBody RegisterVO registerVO) {
         Asserts.assertTrue(RegUtils.accountMatch(registerVO.getAccount(), ErrorCode.ACCOUNT_FORMAT_ERROR), ErrorCode.ACCOUNT_FORMAT_ERROR);
         Asserts.assertTrue(RegUtils.passwordMatch(registerVO.getPassword(), ErrorCode.PASSWORD_FORMAT_ERROR), ErrorCode.PASSWORD_FORMAT_ERROR);
-        String randomValue = LockUtil.randomValue();
         String lockKey = KeyFactory.REGISTER.getKey(registerVO.getAccount());
-        LockUtil.lockSuccess(lockKey, randomValue, 5);
+        DistributeLock lock = LockUtil.getLock(lockKey);
+        lock.lock();
         try {
             Asserts.assertFalse(userService.checkIfExist(registerVO.getAccount()), ErrorCode.ACCOUNT_REPEAT_ERROR);
             String secret = CacheUtil.get(KeyFactory.SECRET.getKey(registerVO.getAccount()), String.class);
@@ -61,7 +62,7 @@ public class CommonController {
             registerVO.setSecret(secret);
             return userService.register(registerVO);
         } finally {
-            LockUtil.unlockWithWarn(lockKey, randomValue);
+            lock.unlock();
         }
     }
 
@@ -72,13 +73,13 @@ public class CommonController {
         Asserts.assertNotEmpty(loginVO.getPassword(), ErrorCode.PASSWORD_ERROR);
         Asserts.assertPositive(loginVO.getCode(), ErrorCode.DYNAMIC_PASSWORD_ERROR);
 
-        String randomValue = LockUtil.randomValue();
         String lockKey = KeyFactory.REGISTER.getKey(loginVO.getAccount());
-        LockUtil.lockSuccess(lockKey, randomValue, 5);
+        DistributeLock lock = LockUtil.getLock(lockKey);
+        lock.lock();
         try {
             return userService.login(loginVO);
         } finally {
-            LockUtil.unlockWithWarn(lockKey, randomValue);
+            lock.unlock();
         }
     }
 }

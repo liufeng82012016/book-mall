@@ -6,9 +6,10 @@ public enum ErrorCode {
      */
     LOCK_ERROR(1001, "请稍后再试"),
     SYSTEM_ERROR(1002, "系统繁忙"),
-    DATA_ERROR(1101, "数据异常"),
-    PARAM_ERROR(1102, "参数异常"),
-    BIZ_ERROR(1103, "未知异常"),
+    DATA_ERROR(1103, "数据异常"),
+    PARAM_ERROR(1104, "参数异常"),
+    BIZ_ERROR(1105, "未知异常"),
+    NOT_LOGIN_ERROR(1106, "请登录后访问"),
     /**
      * 用户模块自定义异常
      */

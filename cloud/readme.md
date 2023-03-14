@@ -1,11 +1,13 @@
 ### 版本号
-Nacos 2.2.0
-Redis 5.0.14
-MySQL 8.0.17
-ELK   7.17.6
-Spring Boot 2.7.4
-Spring Cloud 2021.0.4
-Spring Cloud Alibaba 2021.0.4.0
+Nacos:  2.2.0
+Redis:  5.0.14
+MySQL:  8.0.17
+ELK:    7.17.6
+Spring Boot:  2.7.4
+Spring Cloud:  2021.0.4
+Spring Cloud Alibaba:  2021.0.4.0
+Spring Doc:  1.6.10
+Redisson:  3.17.6
 
 
 pinia: 2.0.33
@@ -102,14 +104,19 @@ vue-tsc: 1.0.24
            3. 待补充，没看明白...
        16. 总之，是测试代码问题，实际上配置刷新已经成功了
 15. 网关基本功能ok，添加其他模块 
-    1. provider：作为starter为其他服务提供者提供支持，包含redis，openfeign配置
+    1. provider：作为starter为其他服务提供者提供支持
+       1. 通用拦截器
+       2. redis设置
+       3. 全局异常处理器
+       4. 单用户分布式锁
+       5. 自定义feign ErrorDecoder
     2. common：基础包，提供各种实体类、通用工具类
     3. auth：用户登录注册、权限管理
     4. admin：提供后台管理接口
-    5. consumer：提供web接口
+    5. web：提供web接口
     6. openapi：暂无（如提供外部接口访问再建立）
     7. book：书籍管理服务
-    8. 备注：gateway只提供admin、consumer、openapi路由，服务提供者不暴露
+    8. 备注：gateway只提供admin、web、openapi路由，服务提供者不暴露
 16. 
 
 

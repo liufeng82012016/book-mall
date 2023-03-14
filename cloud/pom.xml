@@ -19,7 +19,7 @@
     <modules>
         <module>gateway</module>
         <module>auth</module>
-        <module>consumer</module>
+        <module>web</module>
         <module>common</module>
         <module>tool</module>
         <module>admin</module>
@@ -45,6 +45,8 @@
         <spring-doc.version>1.6.10</spring-doc.version>
         <!--swagger和springdoc版本号保持对应关系-->
         <swagger-annotations>2.2.2</swagger-annotations>
+        <!--https://github.com/redisson/redisson/tree/master/redisson-spring-boot-starter-->
+        <redisson-version>3.17.6</redisson-version>
     </properties>
 
 
@@ -52,12 +54,6 @@
         <repository>
             <id>aliyun</id>
             <url>https://maven.aliyun.com/repository/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
         </repository>
     </repositories>
 

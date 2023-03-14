@@ -16,6 +16,12 @@ import java.nio.charset.StandardCharsets;
 public class RedisConfig {
     @Value("${spring.application.name:default}")
     private String moduleName;
+//    @Value("${spring.redis.host}")
+//    private String host;
+//    @Value("${spring.redis.port}")
+//    private String port;
+//    @Value("${spring.redis.password}")
+//    private String password;
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate(@Autowired RedisConnectionFactory redisConnectionFactory) {
@@ -32,6 +38,14 @@ public class RedisConfig {
         return redisTemplate;
     }
 
+//    @Bean
+//    public RedissonClient redissonClient() {
+//        Config config = new Config();
+//        config.useSingleServer().setAddress("redis://" + host + ":" + port).setPassword(password);
+//        return Redisson.create(config);
+//    }
+
+
     /**
      * 自定义key序列化，增加应用名称以做区分
      */
@@ -47,7 +61,7 @@ public class RedisConfig {
         public byte[] serialize(String str) throws SerializationException {
             String prefix = this.moduleName + ":";
             if (str == null) {
-                return (prefix + "null").getBytes(StandardCharsets.UTF_8);
+                return (prefix + "").getBytes(StandardCharsets.UTF_8);
             }
             return (prefix + str).getBytes(StandardCharsets.UTF_8);
         }

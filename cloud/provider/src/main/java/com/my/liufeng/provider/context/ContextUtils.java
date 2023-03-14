@@ -23,6 +23,10 @@ public class ContextUtils {
     }
 
     public static void removeContext() {
+        UserContext userContext = contextContainer.get();
+        if (userContext != null && userContext.getUserConcurrentLock() != null) {
+            userContext.getUserConcurrentLock().unlock();
+        }
         contextContainer.remove();
     }
 
@@ -39,4 +43,5 @@ public class ContextUtils {
             }
         }
     }
+
 }

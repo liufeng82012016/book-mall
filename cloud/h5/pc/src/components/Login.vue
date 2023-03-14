@@ -89,7 +89,7 @@ const login = ({validateResult, firstError, e}) => {
   if (validateResult === true) {
     $http({
       method: "POST",
-      url: "/activity/public/login",
+      url: "/web/public/login",
       header: {
         'Content-Type': 'application/json'
       },
@@ -108,7 +108,7 @@ const login = ({validateResult, firstError, e}) => {
         MessagePlugin.warning(response.data.msg);
       }
     }).catch(function (error) {
-      MessagePlugin.warning("获取动态口令失败，请稍后再试")
+      MessagePlugin.warning("登录失败，请稍后再试")
     })
   } else {
     MessagePlugin.warning(firstError);

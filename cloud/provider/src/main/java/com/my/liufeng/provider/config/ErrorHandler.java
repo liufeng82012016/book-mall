@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ErrorHandler {
     @Value("${spring.application.name}")
     private String moduleName;
+    @Value("${liufeng.consumer:false}")
+    private boolean consumer;
 
     public ErrorHandler() {
         log.info("module[{}] ErrorHandler init...", moduleName);
@@ -26,8 +28,13 @@ public class ErrorHandler {
      */
     @ExceptionHandler(BrokenException.class)
     public Result<Void> brokenException(BrokenException brokenException) {
-        log.info("捕获自定义异常 code:{} msg:{}", brokenException.getCode(), brokenException.getMsg(), brokenException);
-        ContextUtils.setHttp500();
+        if (brokenException.getErrorVersion() == 1) {
+            // 防止错误日志打印很多次
+            log.info("捕获自定义异常 code:{} msg:{}", brokenException.getCode(), brokenException.getMsg(), brokenException);
+        }
+        if (!consumer) {
+            ContextUtils.setHttp500();
+        }
         return Result.fail(brokenException);
     }
 
@@ -37,7 +44,9 @@ public class ErrorHandler {
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public Result<Void> paramMissingException(MissingServletRequestParameterException e) {
         log.info("接口参数异常", e);
-        ContextUtils.setHttp500();
+        if (!consumer) {
+            ContextUtils.setHttp500();
+        }
         return Result.fail(ErrorCode.PARAM_ERROR, String.format("请求参数：%s不能为空！", e.getParameterName()));
     }
 
@@ -47,7 +56,9 @@ public class ErrorHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public Result<Void> readableException(HttpMessageNotReadableException e) {
         log.info("接口body参数异常", e);
-        ContextUtils.setHttp500();
+        if (!consumer) {
+            ContextUtils.setHttp500();
+        }
         return Result.fail(ErrorCode.PARAM_ERROR, "请求参数不能为空");
     }
 
@@ -57,7 +68,9 @@ public class ErrorHandler {
     @ExceptionHandler(RuntimeException.class)
     public Result<Void> runtimeException(RuntimeException e) {
         log.info("运行时异常", e);
-        ContextUtils.setHttp500();
+        if (!consumer) {
+            ContextUtils.setHttp500();
+        }
         return Result.fail(ErrorCode.SYSTEM_ERROR);
     }
 
@@ -67,9 +80,11 @@ public class ErrorHandler {
     @ExceptionHandler(Exception.class)
     public Result<Void> otherException(Exception e) {
         log.info("未知异常", e);
-        ContextUtils.setHttp500();
+        if (!consumer) {
+            ContextUtils.setHttp500();
+        }
         return Result.fail(ErrorCode.SYSTEM_ERROR);
     }
 
-    
+
 }

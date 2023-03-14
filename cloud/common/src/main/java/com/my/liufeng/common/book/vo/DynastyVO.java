@@ -35,19 +35,19 @@ public class DynastyVO {
         this.description = description;
     }
 
-    public Integer getPageSize() {
-        return pageSize;
+    public Integer getSize() {
+        return size;
     }
 
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
+    public void setSize(Integer size) {
+        this.size = size;
     }
 
-    public Integer getPageNumber() {
-        return PageNumber;
+    public Integer getCurrent() {
+        return current;
     }
 
-    public void setPageNumber(Integer pageNumber) {
-        PageNumber = pageNumber;
+    public void setCurrent(Integer current) {
+        this.current = current;
     }
 }

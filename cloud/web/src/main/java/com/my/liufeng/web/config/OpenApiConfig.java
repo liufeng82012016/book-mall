@@ -18,7 +18,7 @@ public class OpenApiConfig {
         return GroupedOpenApi.builder()
                 .group("liufeng")
                 .pathsToMatch("/**")
-                .displayName("activity模块接口文档")
+                .displayName("web模块接口文档")
                 .build();
     }
 

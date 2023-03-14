@@ -11,6 +11,7 @@ import com.my.liufeng.book.service.IBookService;
 import com.my.liufeng.common.Asserts;
 import com.my.liufeng.common.book.dto.BookPageDTO;
 import com.my.liufeng.common.enums.ErrorCode;
+import com.my.liufeng.provider.support.DistributeLock;
 import com.my.liufeng.provider.utils.BeanCopyUtils;
 import com.my.liufeng.provider.utils.LockUtil;
 import org.springframework.stereotype.Service;
@@ -36,8 +37,8 @@ public class BookPageServiceImpl extends ServiceImpl<BookPageMapper, BookPage> i
         Book book = bookService.getById(bookPageDTO.getBookId());
         Asserts.assertNotNull(book, ErrorCode.BOOK_NOT_EXIST);
         String key = KeyFactory.BOOK_PAGE.getKey(String.valueOf(bookPageDTO.getId() != null ? bookPageDTO.getId() : bookPageDTO.getPageId()));
-        String value = LockUtil.randomValue();
-        LockUtil.lockSuccess(key, value, 3);
+        DistributeLock lock = LockUtil.getLock(key);
+        lock.lock();
         try {
             if (Objects.isNull(bookPageDTO.getId())) {
                 // 新增，保证每一卷编号不重复
@@ -57,7 +58,7 @@ public class BookPageServiceImpl extends ServiceImpl<BookPageMapper, BookPage> i
             }
             saveOrUpdate(BeanCopyUtils.convert(bookPageDTO, BookPage.class));
         } finally {
-            LockUtil.unlock(key, value);
+            lock.unlock();
         }
     }
 }

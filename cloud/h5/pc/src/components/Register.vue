@@ -78,7 +78,7 @@ const generateSecret = () => {
 
   $http({
     method: "GET",
-    url: "/activity/public/getSecret",
+    url: "/web/public/getSecret",
     params: {
       'account': formData.account
     }
@@ -100,7 +100,7 @@ const onSubmit = ({validateResult, firstError, e}) => {
   if (validateResult === true) {
     $http({
       method: "POST",
-      url: "/activity/public/register",
+      url: "/web/public/register",
       header: {
         'Content-Type':'application/json'
       },

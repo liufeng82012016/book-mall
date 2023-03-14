@@ -1,12 +1,25 @@
 package com.my.liufeng.provider.context;
 
+import com.my.liufeng.provider.support.DistributeLock;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 上下文环境
+ */
 public class UserContext {
+    /**
+     * 用户id
+     */
     private Integer userId;
+    /**
+     * 单用户并发锁
+     */
+    private DistributeLock userConcurrentLock;
     private HttpServletRequest request;
     private HttpServletResponse response;
+
 
     public UserContext() {
     }
@@ -39,5 +52,13 @@ public class UserContext {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public DistributeLock getUserConcurrentLock() {
+        return userConcurrentLock;
+    }
+
+    public void setUserConcurrentLock(DistributeLock userConcurrentLock) {
+        this.userConcurrentLock = userConcurrentLock;
     }
 }
