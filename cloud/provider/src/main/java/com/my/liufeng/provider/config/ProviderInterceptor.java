@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class ProviderInterceptor implements HandlerInterceptor {
 
+
     public ProviderInterceptor() {
         log.info("ProviderInterceptor init... ");
     }
@@ -28,7 +29,7 @@ public class ProviderInterceptor implements HandlerInterceptor {
         String userId = request.getHeader(Header.USER_ID.getKey());
         ContextUtils.setContext(new UserContext(StringUtils.isBlank(userId) ? null : Integer.parseInt(userId), request, response));
         if (log.isDebugEnabled()) {
-            log.info("ProviderInterceptor [{}]set context.userId:[{}]", Thread.currentThread().getId(), userId);
+            log.debug("ProviderInterceptor [{}]set context.userId:[{}]", Thread.currentThread().getId(), userId);
         }
         return true;
     }
@@ -37,7 +38,7 @@ public class ProviderInterceptor implements HandlerInterceptor {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         ContextUtils.removeContext();
         if (log.isDebugEnabled()) {
-            log.info("ProviderInterceptor [{}]remove context", Thread.currentThread().getId());
+            log.debug("ProviderInterceptor [{}]remove context", Thread.currentThread().getId());
         }
     }
 }

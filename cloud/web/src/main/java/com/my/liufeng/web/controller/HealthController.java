@@ -1,6 +1,6 @@
-package com.my.liufeng.consumer.controller;
+package com.my.liufeng.web.controller;
 
-import com.my.liufeng.consumer.vo.HealthVO;
+import com.my.liufeng.web.vo.HealthVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;

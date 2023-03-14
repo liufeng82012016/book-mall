@@ -8,7 +8,7 @@
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
-    <artifactId>consumer</artifactId>
+    <artifactId>web</artifactId>
     <dependencies>
         <!--Spring web-->
         <dependency>

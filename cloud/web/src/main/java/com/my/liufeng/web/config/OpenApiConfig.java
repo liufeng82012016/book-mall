@@ -1,4 +1,4 @@
-package com.my.liufeng.consumer.config;
+package com.my.liufeng.web.config;
 
 import io.swagger.v3.oas.models.parameters.HeaderParameter;
 import org.springdoc.core.GroupedOpenApi;

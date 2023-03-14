@@ -1,4 +1,4 @@
-package com.my.liufeng.consumer.controller;
+package com.my.liufeng.web.controller;
 
 import com.my.liufeng.auth.RemoteUserService;
 import com.my.liufeng.common.Asserts;
